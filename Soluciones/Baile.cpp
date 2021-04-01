@@ -1,41 +1,46 @@
-#include<stdio.h>
+#include<iostream>
 #include<algorithm>
 using namespace std;
 
 int n,m;
-int vx[100002];
-int vy[100002];
-int ans;
+int ninos[100002];
+int ninas[100002];
 
 int main()
 {
-	scanf("%d",&n);
-	for(int c = 0; c<n; c++ )
-		scanf("%d",&vx[c]);
-	scanf("%d",&m);
-	for(int c = 0; c<m; c++ )
-		scanf("%d",&vy[c]);
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	
+	cin>>n;
+	for(int c = 0 ; c<n; c++)
+		cin>>ninos[c];
+	
+	cin>>m;
+	for(int c = 0 ; c<m; c++)
+		cin>>ninas[c];
 
-	sort(vx, vx+n);
-	sort(vy, vy+m);
+	sort(ninos, ninos+n);
+	sort(ninas, ninas+m);
 
-	int it = 0;
-	for(int c = 0 ; c<n && it < m; )
+	int pb = 0, pg = 0 ;
+	int ans = 0 ;
+	while( pb < n && pg < m )
 	{
-		//printf("%d ->  %d \n", vx[c], vy[it] );
-		if(abs(vx[c] - vy[it]) < 2)
+		if( abs( ninos[pb] - ninas[pg] ) < 2 )
 		{
-			it++;
-			c++;
-			ans++;
+			ans ++;
+			pb ++;
+			pg ++;
+
 		}
 		else
 		{
-			if( vx[c] < vy[it])
-				c++;
-			else it++;
+			if( ninos[pb] < ninas[pg])
+				pb++;
+			else pg ++;
 		}
-
 	}
-	printf("%d\n",ans);
+
+	cout<<ans;
+	cout<<"\n";
 }
