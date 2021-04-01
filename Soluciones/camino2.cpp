@@ -10,7 +10,7 @@ struct nodo
 
 queue<nodo>cl;
 nodo padre,hijo;
-char n,m,f,cc;
+char fila, columna, tfila, tcolumna;
 bool vis[100][100];
 
 int vx[]={-1,-1,0,1,1,1,0,-1};
@@ -24,17 +24,45 @@ string pas[]= {"U\n","RU\n","R\n","RD\n","D\n","LD\n","L\n","LU\n"} ;
 int main ()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
-    cin>>n>>m>>f>>cc;
-    //return 0;
-    vis[fl[(int(m)-48)]][(int(n)-96)]=true;
-    cl.push({fl[(int(m)-48)],(int(n)-96),0,""});
- 
+    
+   //// la entrada a1
+    /// tomo las letras de la a - h como columna
+    /// y los numeros de 8 a 1 ( arriba hacia abajo en el tablero )
+    /// los tomo alreves 1 a 8 siendo 1 el inicio del tablero 
+    /// no necesariamente debe ser asi, es por comodidad simplemente
+    cin>>columna>>fila>>tcolumna>>tfila;
+
+/// convierto el formato LetraNumero de la entrada en numero numero
+/// donde la coordenada (a,8) = (1,1)
+    int b = columna -  char('a') +1;
+    int a = fila - 48;
+
+    /// debugueo
+    cerr<<"mi fila y columna inicial \n";
+    cerr<<fila<<" "<<columna<<" -> ("<<fl[a]<<","<<b<<")\n";
+    /// debugueo
+
+    vis[fl[a]][b]=true;
+    cl.push({fl[a],b,0,""});
+
+    b = tcolumna -  char('a') +1;
+    a = tfila - 48;
+    a = fl[a]; /// convuerto la fila 1 en 8 ( volteo el tablero)
+    /// aclaro no es estrictamente necesario
+
+    /// debugueo
+    cerr<<"mi fila y columna final \n";
+    cerr<<tfila<<" "<<tcolumna<<" -> ("<<a<<","<<b<<")\n";
+    /// debugueo
+    
+
+
     while(!cl.empty())
     {
         padre=cl.front();
         cl.pop();
        // cout<<padre.x<<" "<<padre.y<<" "<<padre.p<<"\n";
-        if(padre.x==fl[(int(cc)-48)] && padre.y==(int(f)-96))
+        if(padre.x == a && padre.y == b)
         {
             cout<<padre.p<<"\n"<<padre.camino;
             return 0;
