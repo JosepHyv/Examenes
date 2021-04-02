@@ -12,7 +12,7 @@ void soluciona(int x, int y, int pasos_disponibles)
 	if( x < 0 || x >= r || y < 0 || y >= c || pasos_disponibles < 1 || visitado[x][y] || bosque[x][y] == 'T' )
 		return;
 	/// debugeo
-	fprintf(stderr,"%d -> %d  -> %d -> %c\n", x,y,pasos_disponibles,bosque[x][y]);
+	//fprintf(stderr,"%d -> %d  -> %d -> %c\n", x,y,pasos_disponibles,bosque[x][y]);
 
 	/// pregunto si ya llegue 
 	if( x == r-1 && y == 0 )
